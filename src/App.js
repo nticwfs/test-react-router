@@ -1,11 +1,23 @@
-import React, { Component } from "react";
-import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react"; // Unused import (useState)
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
+function Home() {
+  return <h1 style={{ color: "red", fontSize: 25 }}>Home Page</h1>; // Inline style (bad practice)
+}
+
+function About() {
+  return (
+    <React.Fragment>
+      <h1>About Page</h1>
+      <h1>Duplicate Heading</h1> {/* Duplicate heading, semantic issue */}
+    </React.Fragment>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -14,49 +26,17 @@ class App extends Component {
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="/blog">Blog</Link>
-          </li>
+            <Link to="/nonexistent">Broken Link</Link>
+          </li>{" "}
+          {/* Broken link */}
         </ul>
-        <div className="main-route-place">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-          </Routes>
-        </div>
-      </div>
-    );
-  }
-}
-
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Home</h2>
-      </div>
-    );
-  }
-}
-
-class About extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>About</h2>
-      </div>
-    );
-  }
-}
-
-class Blog extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2>Blog</h2>
-      </div>
-    );
-  }
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
